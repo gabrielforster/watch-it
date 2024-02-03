@@ -1,0 +1,48 @@
+service: videos
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  region: sa-east-1
+  runtime: nodejs20.x
+  stage: api
+  timeout: 30
+  environment:
+    NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000'
+
+functions:
+  health:
+    handler: src/functions/health.handler
+    memorySize: 128
+    events:
+      - http:
+          method: POST
+          path: /health
+
+package:
+  individually: true
+  patterns:
+    - '!node_modules/.prisma/client/libquery_engine-*'
+    - 'node_modules/.prisma/client/libquery_engine-rhel-*'
+    - '!node_modules/prisma/libquery_engine-*'
+    - '!node_modules/@prisma/engines/**'
+
+custom:
+  # serverless-offline: ${file(../offlineConfig.yml):services.places}
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude: ['aws-sdk']
+    target: 'node14'
+    define: { 'require.resolve': undefined }
+    platform: 'node'
+    concurrency: 10
+    packagerOptions:
+      scripts:
+        - prisma generate
+
+plugins:
+  - serverless-esbuild
+  - serverless-offline
+    # - serverless-dotenv-plugin
