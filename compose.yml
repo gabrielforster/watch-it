@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  localstack:
+    container_name: localstack-container
+    image: localstack/localstack:latest
+    environment:
+      - DEFAULT_REGION=sa-east-1
+      - SERVICES=s3,sqs,dynamodb,lambda,apigateway
+    ports:
+      - "4566:4566"

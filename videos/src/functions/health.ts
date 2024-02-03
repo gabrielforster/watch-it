@@ -9,4 +9,3 @@ export async function handler (event: APIGatewayProxyEvent, context: Context): P
     .setHeader("x-custom-header", "my custom header value")
     .value;
 }
-
