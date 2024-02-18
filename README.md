@@ -4,13 +4,14 @@
 
 - Streaming
     - Clip (min 10s, max 1min)
-    - Select stream category
+    - Category
+    - Title
 
-    - *Livestream*
+    - **Livestream**
         - Single stream per channel per time
         - Multi resolutions stream
         - ABS
-    - *Replay* (Video "recorded" during the livrestream)
+    - **Replay** (Video "recorded" during the livrestream)
         - Chat replay (user cannot send message)
         - Share url to current timestamp
         - Channel owner can download full stream replay
@@ -35,3 +36,6 @@
     - Search by category
     - Follow a category
     - Channel recommendations for users (based on followerd channels and categories)
+    - Age restriction
+    - Channel descriptiona
+    - Channel links
